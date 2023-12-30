@@ -24,10 +24,6 @@ public class Database {
         return new Database();
     }
 
-    public synchronized Connection getConnection() {
-        return connection;
-    }
-
     public static synchronized void closeConnection() {
         if (connection != null) {
             try {
@@ -38,5 +34,9 @@ public class Database {
                 connection = null;
             }
         }
+    }
+
+    public synchronized Connection getConnection() {
+        return connection;
     }
 }

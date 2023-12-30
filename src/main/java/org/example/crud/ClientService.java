@@ -133,19 +133,4 @@ public class ClientService {
             System.out.println("name: " + client.getName());
         }
     }
-    private static final String DELETE_CLIENT_BY_ID_RANGE = "DELETE FROM client WHERE id BETWEEN ? AND ?";
-
-    public void deleteClientsByIdRange(int startId, int endId) {
-        try (Connection connection = Database.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CLIENT_BY_ID_RANGE)) {
-            preparedStatement.setInt(1, startId);
-            preparedStatement.setInt(2, endId);
-            int rowsDeleted = preparedStatement.executeUpdate();
-            System.out.println(rowsDeleted + " clients deleted successfully in the range from " + startId + " to " + endId);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            Database.closeConnection();
-        }
-    }
 }
