@@ -24,8 +24,8 @@ public class ClientService {
         ClientService clientService = new ClientService();
         clientService.create("Pavel");
         clientService.getById(5L);
-        clientService.setName(24L, "Misha");
-        clientService.deleteById(29L);
+        clientService.setName(40L, "Misha");
+        clientService.deleteById(32L);
         clientService.printClient();
 
     }
@@ -76,13 +76,12 @@ public class ClientService {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CLIENT)) {
             preparedStatement.setString(1, name);
             preparedStatement.setLong(2, id);
-            int rowsUpdated = preparedStatement.executeUpdate();
-//            if (rowsUpdated < 0) {
-//                System.out.println("Name updated successfully");
-//            } else {
-//                throw new IllegalArgumentException("No client found with the given id: " + id);
-//            }
-
+            int rowsUpdate = preparedStatement.executeUpdate();
+            if (rowsUpdate > 0) {
+                System.out.println("Name updated successfully");
+            } else {
+                throw new IllegalArgumentException("No client found with the given id: " + id);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
